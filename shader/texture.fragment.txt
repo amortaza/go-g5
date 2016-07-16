@@ -1,0 +1,23 @@
+#version 330
+
+in vec2 TexCoord;
+out vec4 FragColor;
+
+uniform sampler2D Sampler;
+uniform vec4 Alphas;
+
+void main() {
+
+	float leftTop = Alphas[0];
+	float rightTop = Alphas[1];
+	float rightBottom = Alphas[2];
+	float leftBottom = Alphas[3];
+
+	float s = TexCoord.s;
+	float t = TexCoord.t;
+
+	float alpha = leftTop * (1-s) * (1-t) + rightTop * s * ( 1 - t) + leftBottom * (1-s) * t + rightBottom * s * t;
+
+    FragColor = texture(Sampler, TexCoord.st) * vec4(1,1,1,alpha);
+}
+

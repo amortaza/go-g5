@@ -1,0 +1,17 @@
+#version 330
+
+in vec2 TexCoord;
+out vec4 FragColor;
+
+uniform sampler2D Sampler;
+uniform vec3 RGB;
+uniform vec3 Bg;
+uniform float Alpha;
+
+void main() {
+
+    vec4 tc = texture(Sampler, TexCoord);
+
+    FragColor =  vec4((tc.a * RGB) + (1-tc.a) * Bg, Alpha);
+}
+
