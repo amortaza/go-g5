@@ -8,22 +8,12 @@ import (
 
 var ThreeZeroesFloat32 = []float32{0,0,0}
 var ThreeOnesFloat32 = []float32{1,1,1}
+var FourOnesFloat32 = []float32{1,1,1,1}
 
 func Init() {
 	gl.ClearColor(0.1, 0.4, 0.4, 1.0)
 
-	gl.Disable(gl.DEPTH_TEST)
-	gl.Disable(gl.CULL_FACE)
-
-	// this was enabled before
-	// disabling it so i get good color
-	gl.Disable(gl.FRAMEBUFFER_SRGB);
-
-	// blending is required to be able to render text
-	gl.Enable(gl.BLEND)
-	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
-
-	gl.Enable(gl.MULTISAMPLE)
+	stdGlSetup()
 
 	g_colorRect = NewColorRect()
 	g_textureRect = NewTextureRect("github.com/amortaza/go-g4/shader/texture.vertex.txt", "github.com/amortaza/go-g4/shader/texture.fragment.txt")
@@ -36,6 +26,7 @@ func Init() {
 func Clear(red,green,blue,alpha float32) {
 	gl.ClearColor(gl.Float(red),gl.Float(green),gl.Float(blue),gl.Float(alpha))
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT)
+	//gl.Clear(gl.COLOR_BUFFER_BIT)
 }
 
 func Uninit() {

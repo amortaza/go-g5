@@ -79,12 +79,13 @@ func (t *Texture) Allocate(width, height int) {
 
 	t.Activate(gl.TEXTURE0)
 
+	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.Sizei(t.Width), gl.Sizei(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, gl.Pointer(nil))
+	//gl.TexImage2DMultisample(gl.TEXTURE_2D_MULTISAMPLE, 4, gl.RGBA8, gl.Sizei(t.Width), gl.Sizei(t.Height), gl.Boolean(0))
+
 	gl.TexParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 	gl.TexParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
 	gl.TexParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-
-	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.SRGB_ALPHA, gl.Sizei(t.Width), gl.Sizei(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, gl.Pointer(nil))
 
 	t.Deactivate()
 }

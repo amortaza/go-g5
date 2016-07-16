@@ -45,6 +45,13 @@ func DrawTextureRectUpsideDown(	texture *Texture,
 	g_textureRect.DrawUpsideDown(texture, left, top, width, height, alphas, &g_projection[0])
 }
 
+func DrawRenderTextureRectUpsideDown(	texture *RenderTexture,
+			left, top, width, height int,
+			alphas []float32,) {
+
+	g_textureRect.DrawRenderTextureUpsideDown(texture, left, top, width, height, alphas, &g_projection[0])
+}
+
 func DrawCanvasRect(	canvas *Canvas,
 			left, top, width, height int,
 			alphas []float32,) {

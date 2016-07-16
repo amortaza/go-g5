@@ -20,7 +20,7 @@ var canvas *g5.Canvas
 func afterGL() {
 	var err error
 
-	ctx, err = nanovgo.NewContext(0 /*nanovgo.AntiAlias | nanovgo.StencilStrokes | nanovgo.Debug*/)
+	ctx, err = nanovgo.NewContext(nanovgo.AntiAlias | nanovgo.StencilStrokes /*| nanovgo.Debug*/)
 
 	if err != nil {
 		fmt.Println(err)
@@ -42,6 +42,7 @@ func afterGL() {
 	f := g5.LoadTrueTypeFromFile("github.com/amortaza/go-bellina-examples/assets/fonts/arial.ttf")
 	arial18 = g5.NewG4Font(f, 8)
 	str1 = g5.NewStringTexture("Welcome to Clown World!", arial18)
+	canvas = g5.NewCanvas(640,480)
 }
 
 func onDelete() {
@@ -64,12 +65,20 @@ func onLoop() {
 
 	g5.Clear(0.3, 0.3, 0.32, 1.0)
 
-	ctx.BeginFrame(w, h, 1)
-	demo.RenderDemo(ctx, float32(1), float32(1), float32(w), float32(h), t, false, demoData)
-	ctx.EndFrame()
+	//ctx.BeginFrame(w, h, 1)
+	//demo.RenderDemo(ctx, float32(1), float32(1), float32(1024), float32(768), t, false, demoData)
+	//ctx.EndFrame()
 
-	g5.DrawColorRect3f(0,0,200,200,.5,.1,0)
-	g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
+	canvas.Begin()
+	g5.Clear(0.51, 0.51, 0.51, 1.0)
+	ctx.BeginFrame(640, 480, 1)
+	demo.RenderDemo(ctx, float32(1), float32(1), float32(640), float32(480), t, false, demoData)
+	ctx.EndFrame()
+	canvas.End()
+	canvas.Paint(false, 400, 200, []float32{.5,.5,.5,.5})
+
+	//g5.DrawColorRect3f(0,0,200,200,.5,.1,0)
+	//g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
 
 	g5.PopView()
 }
@@ -80,7 +89,7 @@ func onResize(a,b int) {
 }
 
 func main() {
-	xel.Init("Welcome, home!", 1024, 768)
+	xel.Init("Welcome, home!", 1280, 1024)
 
 	xel.SetCallbacks(afterGL, onLoop, onDelete, onResize, nil, nil, nil )
 	xel.Loop()
