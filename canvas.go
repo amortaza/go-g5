@@ -2,7 +2,6 @@ package g5
 
 import (
 	"github.com/amortaza/go-adt"
- 	//gl "github.com/chsc/gogl/gl33"
 )
  
 var g_frameBufferMSStack adt.Stack
@@ -42,16 +41,6 @@ func (c *Canvas) Clear(red, green, blue float32) {
 var allOnes = []float32{1,1,1,1}
 
 func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
-	//gl.BindFramebuffer(gl.DRAW_FRAMEBUFFER, 0);   // Make sure no FBO is set as the draw framebuffer
-	//gl.BindFramebuffer(gl.READ_FRAMEBUFFER, c.Framebuffer.FBO); // Make sure your multisampled FBO is the read framebuffer
-	//gl.DrawBuffer(gl.FRONT);                       // Set the back buffer as the draw buffer
-	//gl.BlitFramebuffer(0, 0, gl.Int(c.Width), gl.Int(c.Height), 0, 0, gl.Int(c.Width), gl.Int(c.Height), gl.COLOR_BUFFER_BIT, gl.NEAREST);
-	//
-	//
-	//if true {
-	//	return
-	//}
-
 	if alphas == nil {
 		alphas = allOnes
 	}

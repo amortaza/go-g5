@@ -78,7 +78,7 @@ func onLoop() {
 	canvas.Paint(false, 400, 200, []float32{.5,.5,.5,.5})
 
 	//g5.DrawColorRect3f(0,0,200,200,.5,.1,0)
-	//g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
+	g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
 
 	g5.PopView()
 }

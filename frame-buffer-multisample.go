@@ -46,7 +46,6 @@ var ams gl.Enum = gl.COLOR_ATTACHMENT0
 func (f *FrameBufferMS) Begin() {
 	gl.BindFramebuffer(gl.FRAMEBUFFER, f.FBO);
 	gl.DrawBuffers(1, &ams)
-	stdGlSetup()
 }
 
 func (f *FrameBufferMS) End() {
