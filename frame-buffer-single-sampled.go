@@ -4,14 +4,14 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
-type FrameBuffer struct {
+type FrameBufferSingleSampled struct {
 	Texture *Texture
 
 	FBO gl.Uint
 }
 
-func NewFrameBuffer(width, height int) *FrameBuffer {
-	f := &FrameBuffer{}
+func NewFrameBufferSingleSampled(width, height int) *FrameBufferSingleSampled {
+	f := &FrameBufferSingleSampled{}
 
 	f.Texture = NewTexture()
 	f.Texture.Allocate(width,height)
@@ -28,19 +28,22 @@ func NewFrameBuffer(width, height int) *FrameBuffer {
 	return f
 }
 
-var a gl.Enum = gl.COLOR_ATTACHMENT0
-
-func (f *FrameBuffer) Begin() {
+func (f *FrameBufferSingleSampled) Begin() {
 	gl.BindFramebuffer(gl.DRAW_FRAMEBUFFER, f.FBO);
-	gl.DrawBuffers(1, &a)
+
+	var colorAttachment gl.Enum = gl.COLOR_ATTACHMENT0
+	gl.DrawBuffers(1, &colorAttachment)
 }
 
-func (f *FrameBuffer) End() {
+func (f *FrameBufferSingleSampled) End() {
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (f *FrameBuffer) Free() {
+func (f *FrameBufferSingleSampled) Free() {
 	f.Texture.Free()
 
 	gl.DeleteFramebuffers(1, &f.FBO);
 }
+
+
+

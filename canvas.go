@@ -7,17 +7,17 @@ import (
 var g_frameBufferMSStack adt.Stack
 
 type Canvas struct {
-	Framebuffer *FrameBuffer
-	FramebufferMS *FrameBufferMS
+	FramebufferSingleSampled *FrameBufferSingleSampled
+	FramebufferMS            *FrameBufferMultiSampled
 
-	Width, Height int
+	Width, Height            int
 }
 
 func NewCanvas(width, height int) *Canvas {
 	canvas := &Canvas{}
 
-	canvas.Framebuffer = NewFrameBuffer(width, height)
-	canvas.FramebufferMS = NewFrameBufferMS(width, height)
+	canvas.FramebufferSingleSampled = NewFrameBufferSingleSampled(width, height)
+	canvas.FramebufferMS = NewFrameBufferMultiSampled(width, height)
 
 	canvas.Width, canvas.Height = width, height
 
@@ -29,7 +29,7 @@ func (c *Canvas) Begin() {
 
 	g_frameBufferMSStack.Push(c.FramebufferMS)
 
-	texture := c.Framebuffer.Texture
+	texture := c.FramebufferSingleSampled.Texture
 
 	PushView(texture.Width, texture.Height)
 }
@@ -45,10 +45,10 @@ func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 		alphas = allOnes
 	}
 
-	c.FramebufferMS.Transfer(c.Framebuffer)
+	c.FramebufferMS.Transfer(c.FramebufferSingleSampled)
 
 	if seeThru {
-		DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width, c.Height, alphas)
+		DrawTextureRectUpsideDown(c.FramebufferSingleSampled.Texture, left, top, c.Width, c.Height, alphas)
 	} else {
 		DrawCanvasRect(c, left, top, c.Width, c.Height, alphas)
 	}
@@ -63,14 +63,14 @@ func (c *Canvas) End() {
 
 	if g_frameBufferMSStack.Size > 0 {
 
-		frameBufferMS := g_frameBufferMSStack.Top().(*FrameBufferMS)
+		frameBufferMS := g_frameBufferMSStack.Top().(*FrameBufferMultiSampled)
 
 		frameBufferMS.Begin()
 	}
 }
 
 func (c *Canvas) Free() {
-	c.Framebuffer.Free()
+	c.FramebufferSingleSampled.Free()
 }
 
 

@@ -11,14 +11,16 @@ var ThreeOnesFloat32 = []float32{1,1,1}
 var FourOnesFloat32 = []float32{1,1,1,1}
 
 func Init() {
+	gl.Init()
+
 	gl.ClearColor(0.1, 0.4, 0.4, 1.0)
 
 	stdGlSetup()
 
 	g_colorRect = NewColorRect()
-	g_textureRect = NewTextureRect("github.com/amortaza/go-g4/shader/texture.vertex.txt", "github.com/amortaza/go-g4/shader/texture.fragment.txt")
-	g_stringRect = NewTextureRect("github.com/amortaza/go-g4/shader/font.vertex.txt", "github.com/amortaza/go-g4/shader/font.fragment.txt")
-	g_canvasRect = NewTextureRect("github.com/amortaza/go-g4/shader/canvas.vertex.txt", "github.com/amortaza/go-g4/shader/canvas.fragment.txt")
+	g_textureRect = NewTextureRect("github.com/amortaza/go-g5/shader/texture.vertex.txt", "github.com/amortaza/go-g5/shader/texture.fragment.txt")
+	g_stringRect = NewTextureRect("github.com/amortaza/go-g5/shader/font.vertex.txt", "github.com/amortaza/go-g5/shader/font.fragment.txt")
+	g_canvasRect = NewTextureRect("github.com/amortaza/go-g5/shader/canvas.vertex.txt", "github.com/amortaza/go-g5/shader/canvas.fragment.txt")
 
 	fmt.Println("(+) Initialized G5")
 }

@@ -8,13 +8,14 @@ import (
 	"log"
 	gl3 "github.com/chsc/gogl/gl33"
 	g5 "github.com/amortaza/go-g5-chsc-gogl"
+	gfont "github.com/amortaza/go-g5-chsc-gogl/font"
 )
 
 var ctx *nanovgo.Context
 var demoData *demo.DemoData
 
-var arial18 *g5.G5font
-var str1 *g5.StringTexture
+var arial18 *gfont.Gfont
+var str1 *gfont.StringTexture
 var canvas *g5.Canvas
 
 func afterGL() {
@@ -39,9 +40,9 @@ func afterGL() {
 
 	g5.Init()
 
-	f := g5.LoadTrueTypeFromFile("github.com/amortaza/go-bellina-examples/assets/fonts/arial.ttf")
-	arial18 = g5.NewG4Font(f, 8)
-	str1 = g5.NewStringTexture("Welcome to Clown World!", arial18)
+	f := gfont.LoadTrueTypeFromFile("github.com/amortaza/go-bellina-examples/assets/fonts/arial.ttf")
+	arial18 = gfont.NewG5font(f, 8)
+	str1 = gfont.NewStringTexture("Welcome to Clown World!", arial18)
 	canvas = g5.NewCanvas(640,480)
 }
 

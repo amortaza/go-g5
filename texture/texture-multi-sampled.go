@@ -6,7 +6,7 @@ import (
 	_ "image/jpeg"
 )
 
-type TextureMS struct {
+type TextureMultiSampled struct {
 	TextureId     gl.Uint
 
 	Width, Height int
@@ -14,8 +14,8 @@ type TextureMS struct {
 	textureUnit   gl.Enum
 }
 
-func NewTextureMS(width, height int) *TextureMS {
-	t := &TextureMS{}
+func NewTextureMultiSampled(width, height int) *TextureMultiSampled {
+	t := &TextureMultiSampled{}
 
 	gl.GenTextures(1, &t.TextureId)
 
@@ -36,18 +36,18 @@ func NewTextureMS(width, height int) *TextureMS {
 	return t
 }
 
-func (t *TextureMS) Activate(texUnit gl.Enum) {
+func (t *TextureMultiSampled) Activate(texUnit gl.Enum) {
 	gl.ActiveTexture(texUnit)
 	gl.BindTexture(gl.TEXTURE_2D_MULTISAMPLE, t.TextureId)
 	t.textureUnit = texUnit
 }
 
-func (t *TextureMS) Deactivate() {
+func (t *TextureMultiSampled) Deactivate() {
 	t.textureUnit = 0
 	gl.BindTexture(gl.TEXTURE_2D_MULTISAMPLE, 0)
 }
 
-func (t *TextureMS) Free() {
+func (t *TextureMultiSampled) Free() {
 	t.Deactivate()
 	gl.DeleteTextures(1, &t.TextureId);
 	t.TextureId = 0

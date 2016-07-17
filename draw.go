@@ -1,6 +1,8 @@
 package g5
 
-import gl "github.com/chsc/gogl/gl33"
+import (
+	gl "github.com/chsc/gogl/gl33"
+)
 
 func DrawColorRect4f(	left, top, width, height int,
 			r,g,b,a float32) {
@@ -49,7 +51,7 @@ func DrawCanvasRect(	canvas *Canvas,
 			left, top, width, height int,
 			alphas []float32,) {
 
-	g_canvasRect.DrawUpsideDown(canvas.Framebuffer.Texture, left, top, width, height, alphas, &g_projection[0])
+	g_canvasRect.DrawUpsideDown(canvas.FramebufferSingleSampled.Texture, left, top, width, height, alphas, &g_projection[0])
 }
 
 func DrawStringRect(	fontTexture *StringTexture,

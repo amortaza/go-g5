@@ -2,19 +2,20 @@ package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
+	texture "github.com/amortaza/go-g5/texture"
 )
 
-type FrameBufferMS struct {
-	TextureMS *TextureMS
+type FrameBufferMultiSampled struct {
+	TextureMS *texture.TextureMultiSampled
 
 	FBO gl.Uint
 	RBO gl.Uint
 }
 
-func NewFrameBufferMS(width, height int) *FrameBufferMS {
-	f := &FrameBufferMS{}
+func NewFrameBufferMultiSampled(width, height int) *FrameBufferMultiSampled {
+	f := &FrameBufferMultiSampled{}
 
-	f.TextureMS = NewTextureMS(width,height)
+	f.TextureMS = texture.NewTextureMultiSampled(width,height)
 
 	//
 
@@ -41,25 +42,25 @@ func NewFrameBufferMS(width, height int) *FrameBufferMS {
 	return f
 }
 
-var ams gl.Enum = gl.COLOR_ATTACHMENT0
-
-func (f *FrameBufferMS) Begin() {
+func (f *FrameBufferMultiSampled) Begin() {
 	gl.BindFramebuffer(gl.FRAMEBUFFER, f.FBO);
-	gl.DrawBuffers(1, &ams)
+
+	var colorAttachment gl.Enum = gl.COLOR_ATTACHMENT0
+	gl.DrawBuffers(1, &colorAttachment)
 }
 
-func (f *FrameBufferMS) End() {
+func (f *FrameBufferMultiSampled) End() {
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (ms *FrameBufferMS) Transfer(ss *FrameBuffer) {
+func (ms *FrameBufferMultiSampled) Transfer(ss *FrameBufferSingleSampled) {
 	gl.BindFramebuffer(gl.READ_FRAMEBUFFER, ms.FBO)
 	gl.BindFramebuffer(gl.DRAW_FRAMEBUFFER, ss.FBO)
 	gl.BlitFramebuffer(0, 0, gl.Int(ms.TextureMS.Width), gl.Int(ms.TextureMS.Height), 0, 0, gl.Int(ms.TextureMS.Width), gl.Int(ms.TextureMS.Height), gl.COLOR_BUFFER_BIT, gl.NEAREST);
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (f *FrameBufferMS) Free() {
+func (f *FrameBufferMultiSampled) Free() {
 	f.TextureMS.Free()
 
 	gl.DeleteRenderbuffers(1, &f.RBO)

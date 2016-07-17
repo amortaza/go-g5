@@ -2,8 +2,8 @@ package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	"github.com/amortaza/go-g5-chsc-gogl/ace"
-	"github.com/amortaza/go-g5-chsc-gogl/util"
+	"github.com/amortaza/go-g5/ace"
+	"github.com/amortaza/go-g5/util"
 )
 
 type ColorRect struct {
@@ -16,7 +16,7 @@ type ColorRect struct {
 func NewColorRect() *ColorRect {
 	r := &ColorRect{}
 
-	r.program = ace.NewProgram("github.com/amortaza/go-g4/shader/rgb.vertex.txt", "github.com/amortaza/go-g4/shader/rgb.fragment.txt")
+	r.program = ace.NewProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)

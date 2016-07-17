@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-type G5font struct {
+type Gfont struct {
 	Face *font.Face
 	Height int
 	Ascent int
@@ -23,8 +23,8 @@ func LoadTrueTypeFromFile(fontFilename string) *truetype.Font {
 	return f
 }
 
-func NewG4Font(f *truetype.Font, fontSize int) *G5font {
-	g4font := &G5font{}
+func NewGfont(f *truetype.Font, fontSize int) *Gfont {
+	g5font := &Gfont{}
 
 	face := truetype.NewFace(f, &truetype.Options{
 		Size:    float64(fontSize),
@@ -33,18 +33,18 @@ func NewG4Font(f *truetype.Font, fontSize int) *G5font {
 
 	metrics := face.Metrics()
 
-	g4font.Height = metrics.Height.Ceil()
-	g4font.Descent = metrics.Descent.Ceil()
-	g4font.Ascent = metrics.Ascent.Ceil()
-	g4font.Face = &face
+	g5font.Height = metrics.Height.Ceil()
+	g5font.Descent = metrics.Descent.Ceil()
+	g5font.Ascent = metrics.Ascent.Ceil()
+	g5font.Face = &face
 
-	return g4font
+	return g5font
 }
 
-func (f *G5font) Width(str string) int {
+func (f *Gfont) Width(str string) int {
 	return int(font.MeasureString(*f.Face, str)>>6)
 }
 
-func (f *G5font) Free() {
+func (f *Gfont) Free() {
 	fmt.Println("Free has not been implemented for font.AceFont")
 }

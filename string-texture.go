@@ -4,6 +4,7 @@ import (
 	"golang.org/x/image/font"
 	"image"
 	"golang.org/x/image/math/fixed"
+
 )
 
 type StringTexture struct {
@@ -11,7 +12,7 @@ type StringTexture struct {
 	Texture *Texture
 }
 
-func NewStringTexture(str string, aceFont *G5font) *StringTexture {
+func NewStringTexture(str string, aceFont *Gfont) *StringTexture {
 	width := aceFont.Width(str)
 	height := aceFont.Height
 	descent := aceFont.Descent

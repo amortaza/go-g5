@@ -2,7 +2,7 @@ package ace
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	"github.com/amortaza/go-g5-chsc-gogl/util"
+	"github.com/amortaza/go-g5/util"
 )
 
 type Program struct {
