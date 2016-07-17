@@ -5,10 +5,12 @@ import (
  	//gl "github.com/chsc/gogl/gl33"
 )
  
-var g_canvasStack adt.Stack
+var g_frameBufferMSStack adt.Stack
 
 type Canvas struct {
 	Framebuffer *FrameBuffer
+	FramebufferMS *FrameBufferMS
+
 	Width, Height int
 }
 
@@ -16,6 +18,7 @@ func NewCanvas(width, height int) *Canvas {
 	canvas := &Canvas{}
 
 	canvas.Framebuffer = NewFrameBuffer(width, height)
+	canvas.FramebufferMS = NewFrameBufferMS(width, height)
 
 	canvas.Width, canvas.Height = width, height
 
@@ -23,9 +26,9 @@ func NewCanvas(width, height int) *Canvas {
 }
 
 func (c *Canvas) Begin() {
-	c.Framebuffer.Begin()
+	c.FramebufferMS.Begin()
 
-	g_canvasStack.Push(c.Framebuffer)
+	g_frameBufferMSStack.Push(c.FramebufferMS)
 
 	texture := c.Framebuffer.Texture
 
@@ -53,6 +56,8 @@ func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 		alphas = allOnes
 	}
 
+	c.FramebufferMS.Transfer(c.Framebuffer)
+
 	if seeThru {
 		DrawTextureRectUpsideDown(c.Framebuffer.Texture, left, top, c.Width, c.Height, alphas)
 	} else {
@@ -63,15 +68,15 @@ func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 func (c *Canvas) End() {
 	PopView()
 
-	c.Framebuffer.End()
+	c.FramebufferMS.End()
 
-	g_canvasStack.Pop()
+	g_frameBufferMSStack.Pop()
 
-	if g_canvasStack.Size > 0 {
+	if g_frameBufferMSStack.Size > 0 {
 
-		frameBuffer := g_canvasStack.Top().(*FrameBuffer)
+		frameBufferMS := g_frameBufferMSStack.Top().(*FrameBufferMS)
 
-		frameBuffer.Begin()
+		frameBufferMS.Begin()
 	}
 }
 
