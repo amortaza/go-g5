@@ -1,21 +1,20 @@
 package main
 
 import (
-	"github.com/amortaza/go-xel-glfw-goxjs"
+	"github.com/amortaza/go-xel2"
 	"github.com/shibukawa/nanovgo"
 	"fmt"
 	"github.com/shibukawa/nanovgo/sample/demo"
 	"log"
 	gl3 "github.com/chsc/gogl/gl33"
-	g5 "github.com/amortaza/go-g5-chsc-gogl"
-	gfont "github.com/amortaza/go-g5-chsc-gogl/font"
+	"github.com/amortaza/go-g5"
 )
 
 var ctx *nanovgo.Context
 var demoData *demo.DemoData
 
-var arial18 *gfont.Gfont
-var str1 *gfont.StringTexture
+var arial18 *g5.Gfont
+var str1 *g5.StringTexture
 var canvas *g5.Canvas
 
 func afterGL() {
@@ -40,9 +39,9 @@ func afterGL() {
 
 	g5.Init()
 
-	f := gfont.LoadTrueTypeFromFile("github.com/amortaza/go-bellina-examples/assets/fonts/arial.ttf")
-	arial18 = gfont.NewG5font(f, 8)
-	str1 = gfont.NewStringTexture("Welcome to Clown World!", arial18)
+	f := g5.LoadTrueTypeFromFile("github.com/amortaza/go-g5/assets/fonts/arial.ttf")
+	arial18 = g5.NewGfont(f, 8)
+	str1 = g5.NewStringTexture("Welcome to Clown World!", arial18)
 	canvas = g5.NewCanvas(640,480)
 }
 
