@@ -2,12 +2,12 @@ package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	"github.com/amortaza/go-g5/ace"
+	"github.com/amortaza/go-g5/shader"
 	"github.com/amortaza/go-g5/util"
 )
 
 type TextureRect struct {
-	program *ace.Program
+	program *shader.Program
 
 	vao gl.Uint
 	vbo gl.Uint
@@ -16,7 +16,7 @@ type TextureRect struct {
 func NewTextureRect(vertexShaderFilename, fragmentShaderFilename string) *TextureRect {
 	r := &TextureRect{}
 
-	r.program = ace.NewProgram(vertexShaderFilename, fragmentShaderFilename)
+	r.program = shader.NewProgram(vertexShaderFilename, fragmentShaderFilename)
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)

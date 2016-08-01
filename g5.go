@@ -19,8 +19,6 @@ func Init() {
 
 	g_colorRect = NewColorRect()
 	g_textureRect = NewTextureRect("github.com/amortaza/go-g5/shader/texture.vertex.txt", "github.com/amortaza/go-g5/shader/texture.fragment.txt")
-	g_stringRect = NewTextureRect("github.com/amortaza/go-g5/shader/font.vertex.txt", "github.com/amortaza/go-g5/shader/font.fragment.txt")
-	g_canvasRect = NewTextureRect("github.com/amortaza/go-g5/shader/canvas.vertex.txt", "github.com/amortaza/go-g5/shader/canvas.fragment.txt")
 
 	fmt.Println("(+) Initialized G5")
 }
@@ -32,8 +30,6 @@ func Clear(red,green,blue,alpha float32) {
 }
 
 func Uninit() {
-	g_canvasRect.Free()
-	g_stringRect.Free()
 	g_textureRect.Free()
 	g_colorRect.Free()
 

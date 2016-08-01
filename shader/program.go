@@ -1,4 +1,4 @@
-package ace
+package shader
 
 import (
 	gl "github.com/chsc/gogl/gl33"

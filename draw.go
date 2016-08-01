@@ -47,22 +47,6 @@ func DrawTextureRectUpsideDown(	texture *Texture,
 	g_textureRect.DrawUpsideDown(texture, left, top, width, height, alphas, &g_projection[0])
 }
 
-func DrawCanvasRect(	canvas *Canvas,
-			left, top, width, height int,
-			alphas []float32,) {
-
-	g_canvasRect.DrawUpsideDown(canvas.FramebufferSingleSampled.Texture, left, top, width, height, alphas, &g_projection[0])
-}
-
-func DrawStringRect(	fontTexture *StringTexture,
-			left, top int,
-			rgbFg []float32,
-			rgbBg []float32,
-			alpha float32) {
-
-	g_stringRect.DrawString(fontTexture.Texture, left, top, fontTexture.Texture.Width, fontTexture.Texture.Height, rgbFg, rgbBg, alpha, &g_projection[0])
-}
-
 func ClearRect(	width, height int,
 		red, green, blue float32 ) {
 
