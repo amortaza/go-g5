@@ -45,8 +45,6 @@ func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 		alphas = allOnes
 	}
 
-	c.FramebufferMS.Transfer(c.FramebufferSingleSampled)
-
 	if seeThru {
 		DrawTextureRectUpsideDown(c.FramebufferSingleSampled.Texture, left, top, c.Width, c.Height, alphas)
 	} else {
@@ -55,6 +53,8 @@ func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 }
 
 func (c *Canvas) End() {
+	c.FramebufferMS.Transfer(c.FramebufferSingleSampled)
+
 	PopView()
 
 	c.FramebufferMS.End()

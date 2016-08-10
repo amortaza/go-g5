@@ -48,20 +48,24 @@ func onLoop() {
 	g5.Clear(0.3, 0.3, 0.32, 1.0)
 
 	canvas2.Begin()
-	g5.Clear(0.51, 0.51, 0.1, 1.0)
-	g5.DrawStringRect(str2,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
+	{
+		g5.Clear(0.1, 0.5, 0.1, 1.0)
+		g5.DrawStringRect(str2, 10, 10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
+	}
 	canvas2.End()
-	//canvas2.Paint(false, 400, 200, []float32{.5,.5,.5,.5})
 
-	//canvas.Begin()
-	//g5.Clear(0.51, 0.1, 0.51, 1.0)
-	//g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
-	canvas2.Paint(false, 10, 10, []float32{.5,.5,.5,.5})
-	//canvas.End()
-	//canvas.Paint(false, 400, 200, []float32{.5,.5,.5,.5})
+	//canvas2.Paint(false, 100, 200, g5.FourOnesFloat32)
 
+	canvas.Begin()
+	{
+		g5.Clear(0.51, 0.1, 0.51, 1.0)
+		g5.DrawStringRect(str1,10,10, g5.ThreeOnesFloat32, g5.ThreeZeroesFloat32, 1)
+		canvas2.Paint(false, 10, 60, g5.FourOnesFloat32)
+	}
+	canvas.End()
 
-	//g5.DrawColorRect3f(0,0,200,200,.5,.1,0)
+	canvas.Paint(false, 400, 400, g5.FourOnesFloat32)
+
 
 
 	g5.PopView()
