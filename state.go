@@ -17,6 +17,8 @@ var g_viewportWidthStack  adt.Stack
 var g_viewportHeightStack adt.Stack
 var g_orthoStack adt.Stack
 
+var g_devicePixelRatio int
+
 func stdGlSetup() {
 	gl.Disable(gl.DEPTH_TEST)
 	gl.Disable(gl.CULL_FACE)
@@ -27,6 +29,7 @@ func stdGlSetup() {
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
 	gl.Enable( gl.MULTISAMPLE )
+	gl.Enable( gl.SCISSOR_TEST)
 }
 
 
