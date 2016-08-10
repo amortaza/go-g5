@@ -29,6 +29,11 @@ func (r *TextureRect) Draw(	texture *Texture,
 				leftTopRightBottomAlphas []float32,
 				projection *float32 ) {
 
+	left *= g_devicePixelRatio
+	top *= g_devicePixelRatio
+	width *= g_devicePixelRatio
+	height *= g_devicePixelRatio
+
 	r.program.Activate()
 
 	texture.Activate(gl.TEXTURE0)
@@ -66,6 +71,11 @@ func (r *TextureRect) DrawUpsideDown(	texture *Texture,
 					left, top, width, height int,
 					leftTopRightBottomAlphas []float32,
 					projection *float32 ) {
+
+	left *= g_devicePixelRatio
+	top *= g_devicePixelRatio
+	width *= g_devicePixelRatio
+	height *= g_devicePixelRatio
 
 	r.program.Activate()
 

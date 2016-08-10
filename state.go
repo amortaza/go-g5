@@ -25,6 +25,7 @@ func stdGlSetup() {
 	gl.BlendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
 	gl.Enable( gl.MULTISAMPLE )
+	gl.Enable( gl.SCISSOR_TEST)
 }
 
 
