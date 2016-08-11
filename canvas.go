@@ -71,6 +71,7 @@ func (c *Canvas) End() {
 
 func (c *Canvas) Free() {
 	c.FramebufferSingleSampled.Free()
+	c.FramebufferMS.Free()
 }
 
 
