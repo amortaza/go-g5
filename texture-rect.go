@@ -29,10 +29,10 @@ func (r *TextureRect) Draw(	texture *Texture,
 				leftTopRightBottomAlphas []float32,
 				projection *float32 ) {
 
-	left *= g_devicePixelRatio
-	top *= g_devicePixelRatio
-	width *= g_devicePixelRatio
-	height *= g_devicePixelRatio
+	//left *= g_devicePixelRatio
+	//top *= g_devicePixelRatio
+	//width *= g_devicePixelRatio
+	//height *= g_devicePixelRatio
 
 	r.program.Activate()
 
@@ -72,10 +72,10 @@ func (r *TextureRect) DrawUpsideDown(	texture *Texture,
 					leftTopRightBottomAlphas []float32,
 					projection *float32 ) {
 
-	left *= g_devicePixelRatio
-	top *= g_devicePixelRatio
-	width *= g_devicePixelRatio
-	height *= g_devicePixelRatio
+	//left *= g_devicePixelRatio
+	//top *= g_devicePixelRatio
+	//width *= g_devicePixelRatio
+	//height *= g_devicePixelRatio
 
 	r.program.Activate()
 
@@ -117,10 +117,10 @@ func (r *TextureRect) DrawString( texture *Texture,
 				alpha float32,
 				projection *float32 ) {
 
-	left *= g_devicePixelRatio
-	top *= g_devicePixelRatio
-	width *= g_devicePixelRatio
-	height *= g_devicePixelRatio
+	//left *= g_devicePixelRatio
+	//top *= g_devicePixelRatio
+	//width *= g_devicePixelRatio
+	//height *= g_devicePixelRatio
 
 	r.program.Activate()
 

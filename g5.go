@@ -10,8 +10,8 @@ var ThreeZeroesFloat32 = []float32{0,0,0}
 var ThreeOnesFloat32 = []float32{1,1,1}
 var FourOnesFloat32 = []float32{1,1,1,1}
 
-func Init(devicePixelRatio int) {
-	g_devicePixelRatio = devicePixelRatio
+func Init(/*devicePixelRatio int*/) {
+	//g_devicePixelRatio = devicePixelRatio
 
 	gl.Init()
 

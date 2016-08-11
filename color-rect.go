@@ -31,10 +31,10 @@ func (r *ColorRect) Draw(	left, top, width, height int,
 				leftBottomColor []float32,
 				projection *gl.Float ) {
 
-	left *= g_devicePixelRatio
-	top *= g_devicePixelRatio
-	width *= g_devicePixelRatio
-	height *= g_devicePixelRatio
+	//left *= g_devicePixelRatio
+	//top *= g_devicePixelRatio
+	//width *= g_devicePixelRatio
+	//height *= g_devicePixelRatio
 
 	r.program.Activate()
 
@@ -63,10 +63,10 @@ func (r *ColorRect) DrawSolid(	left, top, width, height int,
 				red, green, blue float32,
 				projection *gl.Float ) {
 
-	left *= g_devicePixelRatio
-	top *= g_devicePixelRatio
-	width *= g_devicePixelRatio
-	height *= g_devicePixelRatio
+	//left *= g_devicePixelRatio
+	//top *= g_devicePixelRatio
+	//width *= g_devicePixelRatio
+	//height *= g_devicePixelRatio
 
 	r.program.Activate()
 
