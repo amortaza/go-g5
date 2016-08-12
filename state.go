@@ -17,8 +17,6 @@ var g_viewportWidthStack  adt.Stack
 var g_viewportHeightStack adt.Stack
 var g_orthoStack adt.Stack
 
-//var g_devicePixelRatio int
-
 func stdGlSetup() {
 	gl.Disable(gl.DEPTH_TEST)
 	gl.Disable(gl.CULL_FACE)

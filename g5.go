@@ -10,8 +10,7 @@ var ThreeZeroesFloat32 = []float32{0,0,0}
 var ThreeOnesFloat32 = []float32{1,1,1}
 var FourOnesFloat32 = []float32{1,1,1,1}
 
-func Init(/*devicePixelRatio int*/) {
-	//g_devicePixelRatio = devicePixelRatio
+func Init() {
 
 	gl.Init()
 
@@ -30,7 +29,6 @@ func Init(/*devicePixelRatio int*/) {
 func Clear(red,green,blue,alpha float32) {
 	gl.ClearColor(gl.Float(red),gl.Float(green),gl.Float(blue),gl.Float(alpha))
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT)
-	//gl.Clear(gl.COLOR_BUFFER_BIT)
 }
 
 func Uninit() {
