@@ -2,11 +2,10 @@ package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	texture "github.com/amortaza/go-g5/texture"
 )
 
 type FrameBufferMultiSampled struct {
-	TextureMS *texture.TextureMultiSampled
+	TextureMS *TextureMultiSampled
 
 	FBO gl.Uint
 	RBO gl.Uint
@@ -15,7 +14,7 @@ type FrameBufferMultiSampled struct {
 func NewFrameBufferMultiSampled(width, height int) *FrameBufferMultiSampled {
 	f := &FrameBufferMultiSampled{}
 
-	f.TextureMS = texture.NewTextureMultiSampled(width,height)
+	f.TextureMS = NewTextureMultiSampled(width,height)
 
 	//
 

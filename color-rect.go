@@ -2,12 +2,10 @@ package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	"github.com/amortaza/go-g5/ace"
-	"github.com/amortaza/go-g5/util"
 )
 
 type ColorRect struct {
-	program *ace.Program
+	program *Program
 
 	vao gl.Uint
 	vbo gl.Uint
@@ -16,7 +14,7 @@ type ColorRect struct {
 func NewColorRect() *ColorRect {
 	r := &ColorRect{}
 
-	r.program = ace.NewProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
+	r.program = NewProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)
@@ -91,18 +89,18 @@ func (r *ColorRect) Free() {
 func colorRect_setVertexData(data []float32) {
 
 	// copy vertices data into VBO (it needs to be bound first)
-	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(util.GLptr(data)), gl.STATIC_DRAW)
+	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(GLptr(data)), gl.STATIC_DRAW)
 
 	// size of one whole vertex (sum of attrib sizes)
 	var stride int32 = 2 /*posPartCount*/ *4 + 4 /*colorPartCount*/ *4
 	var offset int = 0
 
 	// position
-	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(util.GLptrOffset(offset)))
+	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(GLptrOffset(offset)))
 	gl.EnableVertexAttribArray(0)
 	offset += 2 /*posPartCount*/ * 4
 
 	// color
-	gl.VertexAttribPointer(1, 4 /*colorPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(util.GLptrOffset(offset)))
+	gl.VertexAttribPointer(1, 4 /*colorPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(GLptrOffset(offset)))
 	gl.EnableVertexAttribArray(1)
 }

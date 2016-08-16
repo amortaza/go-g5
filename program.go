@@ -1,8 +1,7 @@
-package ace
+package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
-	"github.com/amortaza/go-g5/util"
 )
 
 type Program struct {
@@ -42,7 +41,7 @@ func (p *Program) Free() {
 }
 
 func (p *Program) GetUniformLocation(name string) gl.Int {
-	return gl.GetUniformLocation(p.programId, util.GLstr(name))
+	return gl.GetUniformLocation(p.programId, GLstr(name))
 }
 
 

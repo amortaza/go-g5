@@ -10,7 +10,6 @@ var g_projection mgl32.Mat4
 
 var g_colorRect *ColorRect
 var g_textureRect *TextureRect
-var g_stringRect *TextureRect
 var g_canvasRect *TextureRect
 
 var g_viewportWidthStack  adt.Stack

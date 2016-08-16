@@ -7,7 +7,6 @@ import (
 	"os"
 	"image"
 	"image/draw"
-	"github.com/amortaza/go-g5/util"
 )
 
 type Texture struct {
@@ -74,7 +73,7 @@ func (t *Texture) LoadImage(filename string) {
 	t.Width  = rgba.Rect.Size().X
 	t.Height = rgba.Rect.Size().Y
 
-	dataPtr := gl.Pointer(util.GLptr(rgba.Pix))
+	dataPtr := gl.Pointer(GLptr(rgba.Pix))
 
 	t.Activate(gl.TEXTURE0)
 
@@ -93,7 +92,7 @@ func (t *Texture) LoadBytes_RGBA(width, height int, bytes []uint8) {
 	t.Width  = width
 	t.Height = height
 
-	dataPtr := gl.Pointer(util.GLptr(bytes))
+	dataPtr := gl.Pointer(GLptr(bytes))
 
 	t.Activate(gl.TEXTURE0)
 

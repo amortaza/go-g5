@@ -1,9 +1,8 @@
-package ace
+package g5
 
 import (
 	gl "github.com/chsc/gogl/gl33"
 	"io/ioutil"
-	"github.com/amortaza/go-g5/util"
 )
 
 type Shader struct {
@@ -29,7 +28,7 @@ func newShader(filename string, shaderType gl.Enum) *Shader {
 
 	shader.shaderId = gl.CreateShader(shaderType)
 
-	glSrc, free := util.GLstrs(string(src) + "\x00")
+	glSrc, free := GLstrs(string(src) + "\x00")
 	defer free()
 
 	gl.ShaderSource(shader.shaderId, 1, glSrc, nil)
