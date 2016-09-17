@@ -1,9 +1,9 @@
 package g5
 
-import (
-	"github.com/amortaza/go-adt"
-)
- 
+import "github.com/amortaza/go-adt"
+
+var allOnes = []float32{1,1,1,1}
+
 var g_frameBufferMSStack adt.Stack
 
 type Canvas struct {
@@ -24,6 +24,14 @@ func NewCanvas(width, height int) *Canvas {
 	return canvas
 }
 
+func (c *Canvas) GetWidth() int {
+	return c.Width
+}
+
+func (c *Canvas) GetHeight() int {
+	return c.Height
+}
+
 func (c *Canvas) Begin() {
 	c.FramebufferMS.Begin()
 
@@ -37,8 +45,6 @@ func (c *Canvas) Begin() {
 func (c *Canvas) Clear(red, green, blue float32) {
 	ClearRect(c.Width, c.Height, red, green, blue)
 }
-
-var allOnes = []float32{1,1,1,1}
 
 func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
 	if alphas == nil {
