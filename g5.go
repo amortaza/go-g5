@@ -18,7 +18,7 @@ func Init() {
 	g_textureRect = newTextureRect("github.com/amortaza/go-g5/shader/texture.vertex.txt", "github.com/amortaza/go-g5/shader/texture.fragment.txt")
 	g_canvasRect = newTextureRect("github.com/amortaza/go-g5/shader/canvas.vertex.txt", "github.com/amortaza/go-g5/shader/canvas.fragment.txt")
 
-	fmt.Println("(+) Initialized G5")
+	fmt.Println("(+) G5 Initialized")
 }
 
 func Clear(red, green, blue float32) {
@@ -34,7 +34,7 @@ func Uninit() {
 	g_textureRect.Free()
 	g_colorRect.Free()
 
-	fmt.Println("(-) Uninitialized G5")
+	fmt.Println("(-) G5 Uninitialized")
 }
 
 func PushView(width, height int) {
