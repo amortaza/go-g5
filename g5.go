@@ -26,11 +26,13 @@ func Init() {
 }
 
 func Clear(red,green,blue,alpha float32) {
+
 	gl.ClearColor(gl.Float(red),gl.Float(green),gl.Float(blue),gl.Float(alpha))
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT)
 }
 
 func Uninit() {
+
 	g_canvasRect.Free()
 	g_textureRect.Free()
 	g_colorRect.Free()
@@ -39,16 +41,19 @@ func Uninit() {
 }
 
 func PushView(width, height int) {
+
 	PushViewport(width, height)
 	PushOrtho(width,height)
 }
 
 func PopView() {
+
 	PopViewport()
 	PopOrtho()
 }
 
 func PushViewport(width, height int) {
+
 	g_viewportWidthStack.Push(width)
 	g_viewportHeightStack.Push(height)
 
@@ -56,10 +61,12 @@ func PushViewport(width, height int) {
 }
 
 func PopViewport() {
+
 	g_viewportWidthStack.Pop()
 	g_viewportHeightStack.Pop()
 
 	if g_viewportWidthStack.Size != 0 {
+
 		width, _ := g_viewportWidthStack.Top().(int)
 		height, _ := g_viewportHeightStack.Top().(int)
 
@@ -68,6 +75,7 @@ func PopViewport() {
 }
 
 func PushOrtho(width, height int) {
+
 	g_projection = mgl32.Ortho2D(0, float32(width), float32(height), 0)
 	g_orthoStack.Push(g_projection)
 }

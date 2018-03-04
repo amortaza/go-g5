@@ -5,6 +5,7 @@ import (
 )
 
 type ColorRect struct {
+
 	program *Program
 
 	vao gl.Uint
@@ -12,6 +13,7 @@ type ColorRect struct {
 }
 
 func NewColorRect() *ColorRect {
+
 	r := &ColorRect{}
 
 	r.program = NewProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
@@ -22,7 +24,8 @@ func NewColorRect() *ColorRect {
 	return r
 }
 
-func (r *ColorRect) Draw(	left, top, width, height int,
+func (r *ColorRect) Draw(
+				left, top, width, height int,
 				leftTopColor []float32,
 				rightTopColor []float32,
 				rightBottomColor []float32,
@@ -52,7 +55,8 @@ func (r *ColorRect) Draw(	left, top, width, height int,
 	gl.BindVertexArray(0)
 }
 
-func (r *ColorRect) DrawSolid(	left, top, width, height int,
+func (r *ColorRect) DrawSolid(
+				left, top, width, height int,
 				red, green, blue float32,
 				projection *gl.Float ) {
 
@@ -80,6 +84,7 @@ func (r *ColorRect) DrawSolid(	left, top, width, height int,
 }
 
 func (r *ColorRect) Free() {
+
 	gl.DeleteVertexArrays(1, &r.vao)
 	gl.DeleteBuffers(1, &r.vbo)
 

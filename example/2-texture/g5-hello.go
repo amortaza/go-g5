@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/amortaza/go-xel2"
 	"fmt"
 	gl3 "github.com/chsc/gogl/gl33"
 	"github.com/amortaza/go-g5"
+	"github.com/amortaza/go-xel"
 )
 
 var arial18 *g5.Gfont
