@@ -6,10 +6,6 @@ import (
 	"fmt"
 )
 
-var ThreeZeroesFloat32 = []float32{0,0,0}
-var ThreeOnesFloat32 = []float32{1,1,1}
-var FourOnesFloat32 = []float32{1,1,1,1}
-
 func Init() {
 
 	gl.Init()
@@ -18,16 +14,17 @@ func Init() {
 
 	stdGlSetup()
 
-	g_colorRect = NewColorRect()
-	g_textureRect = NewTextureRect("github.com/amortaza/go-g5/shader/texture.vertex.txt", "github.com/amortaza/go-g5/shader/texture.fragment.txt")
-	g_canvasRect = NewTextureRect("github.com/amortaza/go-g5/shader/canvas.vertex.txt", "github.com/amortaza/go-g5/shader/canvas.fragment.txt")
+	g_colorRect = newColorRect()
+	g_textureRect = newTextureRect("github.com/amortaza/go-g5/shader/texture.vertex.txt", "github.com/amortaza/go-g5/shader/texture.fragment.txt")
+	g_canvasRect = newTextureRect("github.com/amortaza/go-g5/shader/canvas.vertex.txt", "github.com/amortaza/go-g5/shader/canvas.fragment.txt")
 
 	fmt.Println("(+) Initialized G5")
 }
 
-func Clear(red,green,blue,alpha float32) {
+func Clear(red, green, blue float32) {
 
-	gl.ClearColor(gl.Float(red),gl.Float(green),gl.Float(blue),gl.Float(alpha))
+	gl.ClearColor(gl.Float(red), gl.Float(green), gl.Float(blue), 1.0)
+
 	gl.Clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT)
 }
 

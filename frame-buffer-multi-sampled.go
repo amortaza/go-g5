@@ -4,15 +4,16 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
-type FrameBufferMultiSampled struct {
+type _FrameBufferMultiSampled struct {
 	TextureMS *TextureMultiSampled
 
 	FBO gl.Uint
 	RBO gl.Uint
 }
 
-func NewFrameBufferMultiSampled(width, height int) *FrameBufferMultiSampled {
-	f := &FrameBufferMultiSampled{}
+func newFrameBufferMultiSampled(width, height int) *_FrameBufferMultiSampled {
+
+	f := &_FrameBufferMultiSampled{}
 
 	f.TextureMS = NewTextureMultiSampled(width,height)
 
@@ -41,25 +42,29 @@ func NewFrameBufferMultiSampled(width, height int) *FrameBufferMultiSampled {
 	return f
 }
 
-func (f *FrameBufferMultiSampled) Begin() {
+func (f *_FrameBufferMultiSampled) Begin() {
+
 	gl.BindFramebuffer(gl.FRAMEBUFFER, f.FBO);
 
 	var colorAttachment gl.Enum = gl.COLOR_ATTACHMENT0
 	gl.DrawBuffers(1, &colorAttachment)
 }
 
-func (f *FrameBufferMultiSampled) End() {
+func (f *_FrameBufferMultiSampled) End() {
+
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (ms *FrameBufferMultiSampled) Transfer(ss *FrameBufferSingleSampled) {
+func (ms *_FrameBufferMultiSampled) Transfer(ss *_FrameBufferSingleSampled) {
+
 	gl.BindFramebuffer(gl.READ_FRAMEBUFFER, ms.FBO)
 	gl.BindFramebuffer(gl.DRAW_FRAMEBUFFER, ss.FBO)
 	gl.BlitFramebuffer(0, 0, gl.Int(ms.TextureMS.Width), gl.Int(ms.TextureMS.Height), 0, 0, gl.Int(ms.TextureMS.Width), gl.Int(ms.TextureMS.Height), gl.COLOR_BUFFER_BIT, gl.NEAREST);
 	gl.BindFramebuffer(gl.FRAMEBUFFER, 0)
 }
 
-func (f *FrameBufferMultiSampled) Free() {
+func (f *_FrameBufferMultiSampled) Free() {
+
 	f.TextureMS.Free()
 
 	gl.DeleteRenderbuffers(1, &f.RBO)

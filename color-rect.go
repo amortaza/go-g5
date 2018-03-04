@@ -4,19 +4,19 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
-type ColorRect struct {
+type _ColorRect struct {
 
-	program *Program
+	program *_Program
 
 	vao gl.Uint
 	vbo gl.Uint
 }
 
-func NewColorRect() *ColorRect {
+func newColorRect() *_ColorRect {
 
-	r := &ColorRect{}
+	r := &_ColorRect{}
 
-	r.program = NewProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
+	r.program = newProgram("github.com/amortaza/go-g5/shader/rgb.vertex.txt", "github.com/amortaza/go-g5/shader/rgb.fragment.txt")
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)
@@ -24,7 +24,7 @@ func NewColorRect() *ColorRect {
 	return r
 }
 
-func (r *ColorRect) Draw(
+func (r *_ColorRect) Draw(
 				left, top, width, height int,
 				leftTopColor []float32,
 				rightTopColor []float32,
@@ -44,9 +44,9 @@ func (r *ColorRect) Draw(
 
 	vertices := []float32{
 		float32(left), float32(top), leftTopColor[0], leftTopColor[1], leftTopColor[2], leftTopColor[3],
-			float32(right), float32(top), rightTopColor[0], rightTopColor[1], rightTopColor[2], rightTopColor[3],
-				float32(right), float32(bottom), rightBottomColor[0], rightBottomColor[1], rightBottomColor[2], rightBottomColor[3],
-					float32(left), float32(bottom), leftBottomColor[0], leftBottomColor[1], leftBottomColor[2], leftBottomColor[3] }
+		float32(right), float32(top), rightTopColor[0], rightTopColor[1], rightTopColor[2], rightTopColor[3],
+		float32(right), float32(bottom), rightBottomColor[0], rightBottomColor[1], rightBottomColor[2], rightBottomColor[3],
+		float32(left), float32(bottom), leftBottomColor[0], leftBottomColor[1], leftBottomColor[2], leftBottomColor[3] }
 
 	colorRect_setVertexData(vertices)
 
@@ -55,7 +55,7 @@ func (r *ColorRect) Draw(
 	gl.BindVertexArray(0)
 }
 
-func (r *ColorRect) DrawSolid(
+func (r *_ColorRect) DrawSolid(
 				left, top, width, height int,
 				red, green, blue float32,
 				projection *gl.Float ) {
@@ -72,9 +72,9 @@ func (r *ColorRect) DrawSolid(
 
 	vertices := []float32{
 		float32(left), float32(top), red, green, blue, 1,
-			float32(right), float32(top), red, green, blue, 1,
-				float32(right), float32(bottom), red, green, blue, 1,
-					float32(left), float32(bottom), red, green, blue, 1 }
+		float32(right), float32(top), red, green, blue, 1,
+		float32(right), float32(bottom), red, green, blue, 1,
+		float32(left), float32(bottom), red, green, blue, 1 }
 
 	colorRect_setVertexData(vertices)
 
@@ -83,7 +83,7 @@ func (r *ColorRect) DrawSolid(
 	gl.BindVertexArray(0)
 }
 
-func (r *ColorRect) Free() {
+func (r *_ColorRect) Free() {
 
 	gl.DeleteVertexArrays(1, &r.vao)
 	gl.DeleteBuffers(1, &r.vbo)
@@ -94,18 +94,18 @@ func (r *ColorRect) Free() {
 func colorRect_setVertexData(data []float32) {
 
 	// copy vertices data into VBO (it needs to be bound first)
-	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(GLptr(data)), gl.STATIC_DRAW)
+	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(glPtr(data)), gl.STATIC_DRAW)
 
 	// size of one whole vertex (sum of attrib sizes)
 	var stride int32 = 2 /*posPartCount*/ *4 + 4 /*colorPartCount*/ *4
 	var offset int = 0
 
 	// position
-	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(GLptrOffset(offset)))
+	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(glPtrOffset(offset)))
 	gl.EnableVertexAttribArray(0)
 	offset += 2 /*posPartCount*/ * 4
 
 	// color
-	gl.VertexAttribPointer(1, 4 /*colorPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(GLptrOffset(offset)))
+	gl.VertexAttribPointer(1, 4 /*colorPartCount*/, gl.FLOAT, 0, gl.Sizei(stride), gl.Pointer(glPtrOffset(offset)))
 	gl.EnableVertexAttribArray(1)
 }

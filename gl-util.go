@@ -10,7 +10,7 @@ import (
 // #include <stdlib.h>
 import "C"
 
-func GLstr(str string) *gl.Char {
+func glStr(str string) *gl.Char {
 	str = str +  "\x00"
 
 	header := (*reflect.StringHeader)(unsafe.Pointer(&str))
@@ -18,7 +18,7 @@ func GLstr(str string) *gl.Char {
 	return (*gl.Char)(unsafe.Pointer(header.Data))
 }
 
-func GLstrs(strs ...string) (cstrs **gl.Char, freefunc func()) {
+func glStrs(strs ...string) (cstrs **gl.Char, freefunc func()) {
 	// Allocate a contiguous array large enough to hold all the strings' contents.
 	n := 0
 	for i := range strs {
@@ -43,7 +43,7 @@ func GLstrs(strs ...string) (cstrs **gl.Char, freefunc func()) {
 	return (**gl.Char)(&css[0]), func() { C.free(data) }
 }
 
-func GLptr(data interface{}) unsafe.Pointer {
+func glPtr(data interface{}) unsafe.Pointer {
 	if data == nil {
 		return unsafe.Pointer(nil)
 	}
@@ -74,7 +74,7 @@ func GLptr(data interface{}) unsafe.Pointer {
 // PtrOffset takes a pointer offset and returns a GL-compatible pointer.
 // Useful for functions such as glVertexAttribPointer that take pointer
 // parameters indicating an offset rather than an absolute memory address.
-func GLptrOffset(offset int) unsafe.Pointer {
+func glPtrOffset(offset int) unsafe.Pointer {
 	return unsafe.Pointer(uintptr(offset))
 }
 

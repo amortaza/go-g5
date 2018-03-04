@@ -4,17 +4,18 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
-type TextureRect struct {
-	program *Program
+type _TextureRect struct {
+	program *_Program
 
 	vao gl.Uint
 	vbo gl.Uint
 }
 
-func NewTextureRect(vertexShaderFilename, fragmentShaderFilename string) *TextureRect {
-	r := &TextureRect{}
+func newTextureRect(vertexShaderFilename, fragmentShaderFilename string) *_TextureRect {
 
-	r.program = NewProgram(vertexShaderFilename, fragmentShaderFilename)
+	r := &_TextureRect{}
+
+	r.program = newProgram(vertexShaderFilename, fragmentShaderFilename)
 
 	gl.GenVertexArrays(1, &r.vao)
 	gl.GenBuffers(1, &r.vbo)
@@ -22,10 +23,11 @@ func NewTextureRect(vertexShaderFilename, fragmentShaderFilename string) *Textur
 	return r
 }
 
-func (r *TextureRect) Draw(	texture *Texture,
-				left, top, width, height int,
-				leftTopRightBottomAlphas []float32,
-				projection *float32 ) {
+func (r *_TextureRect) Draw(
+		texture *Texture,
+		left, top, width, height int,
+		leftTopRightBottomAlphas []float32,
+		projection *float32 ) {
 
 	r.program.Activate()
 
@@ -34,10 +36,10 @@ func (r *TextureRect) Draw(	texture *Texture,
 	gl.Uniform1i(r.program.GetUniformLocation("Sampler"), 0)
 	gl.UniformMatrix4fv(r.program.GetUniformLocation("Projection"), 1, gl.FALSE, (*gl.Float)(projection))
 	gl.Uniform4f(r.program.GetUniformLocation("Alphas"),
-		gl.Float(leftTopRightBottomAlphas[0]),
-		gl.Float(leftTopRightBottomAlphas[1]),
-		gl.Float(leftTopRightBottomAlphas[2]),
-		gl.Float(leftTopRightBottomAlphas[3]));
+	gl.Float(leftTopRightBottomAlphas[0]),
+	gl.Float(leftTopRightBottomAlphas[1]),
+	gl.Float(leftTopRightBottomAlphas[2]),
+	gl.Float(leftTopRightBottomAlphas[3]));
 
 	gl.BindVertexArray(r.vao)
 	gl.BindBuffer(gl.ARRAY_BUFFER, r.vbo)
@@ -60,10 +62,11 @@ func (r *TextureRect) Draw(	texture *Texture,
 	texture.Deactivate()
 }
 
-func (r *TextureRect) DrawUpsideDown(	texture *Texture,
-					left, top, width, height int,
-					leftTopRightBottomAlphas []float32,
-					projection *float32 ) {
+func (r *_TextureRect) DrawUpsideDown(
+		texture *Texture,
+		left, top, width, height int,
+		leftTopRightBottomAlphas []float32,
+		projection *float32 ) {
 
 	r.program.Activate()
 
@@ -72,10 +75,10 @@ func (r *TextureRect) DrawUpsideDown(	texture *Texture,
 	gl.Uniform1i(r.program.GetUniformLocation("Sampler"), 0)
 	gl.UniformMatrix4fv(r.program.GetUniformLocation("Projection"), 1, gl.FALSE, (*gl.Float)(projection))
 	gl.Uniform4f(r.program.GetUniformLocation("Alphas"),
-		gl.Float(leftTopRightBottomAlphas[0]),
-		gl.Float(leftTopRightBottomAlphas[1]),
-		gl.Float(leftTopRightBottomAlphas[2]),
-		gl.Float(leftTopRightBottomAlphas[3]));
+	gl.Float(leftTopRightBottomAlphas[0]),
+	gl.Float(leftTopRightBottomAlphas[1]),
+	gl.Float(leftTopRightBottomAlphas[2]),
+	gl.Float(leftTopRightBottomAlphas[3]));
 
 	gl.BindVertexArray(r.vao)
 	gl.BindBuffer(gl.ARRAY_BUFFER, r.vbo)
@@ -98,7 +101,8 @@ func (r *TextureRect) DrawUpsideDown(	texture *Texture,
 	texture.Deactivate()
 }
 
-func (r *TextureRect) Free() {
+func (r *_TextureRect) Free() {
+
 	gl.DeleteVertexArrays(1, &r.vao)
 	gl.DeleteBuffers(1, &r.vbo)
 
@@ -108,18 +112,18 @@ func (r *TextureRect) Free() {
 func setVertexData2(data []float32) {
 
 	// copy vertices data into VBO (it needs to be bound first)
-	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(GLptr(data)), gl.STATIC_DRAW)
+	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(glPtr(data)), gl.STATIC_DRAW)
 
 	// size of one whole vertex (sum of attrib sizes)
 	var stride gl.Sizei = 2 /*posPartCount*/ *4 + 2 /*texPartCount*/ *4
 	var offset int = 0
 
 	// position
-	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, gl.FALSE, stride, gl.Pointer(GLptrOffset(offset)))
+	gl.VertexAttribPointer(0, 2 /*posPartCount*/, gl.FLOAT, gl.FALSE, stride, gl.Pointer(glPtrOffset(offset)))
 	gl.EnableVertexAttribArray(0)
 	offset += 2 /*posPartCount*/ * 4
 
 	// texture
-	gl.VertexAttribPointer(1, 2 /*texPartCount*/, gl.FLOAT, gl.FALSE, stride, gl.Pointer(GLptrOffset(offset)))
+	gl.VertexAttribPointer(1, 2 /*texPartCount*/, gl.FLOAT, gl.FALSE, stride, gl.Pointer(glPtrOffset(offset)))
 	gl.EnableVertexAttribArray(1)
 }

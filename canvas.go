@@ -2,22 +2,21 @@ package g5
 
 import "github.com/amortaza/go-adt"
 
-var allOnes = []float32{1,1,1,1}
-
-var g_frameBufferMSStack adt.Stack
+var g_frameBufferMultiSampledStack adt.Stack
 
 type Canvas struct {
-	FramebufferSingleSampled *FrameBufferSingleSampled
-	FramebufferMS            *FrameBufferMultiSampled
-
 	Width, Height            int
+
+	framebufferSingleSampled *_FrameBufferSingleSampled
+	framebufferMultiSampled  *_FrameBufferMultiSampled
 }
 
 func NewCanvas(width, height int) *Canvas {
+
 	canvas := &Canvas{}
 
-	canvas.FramebufferSingleSampled = NewFrameBufferSingleSampled(width, height)
-	canvas.FramebufferMS = NewFrameBufferMultiSampled(width, height)
+	canvas.framebufferSingleSampled = newFrameBufferSingleSampled(width, height)
+	canvas.framebufferMultiSampled = newFrameBufferMultiSampled(width, height)
 
 	canvas.Width, canvas.Height = width, height
 
@@ -25,59 +24,74 @@ func NewCanvas(width, height int) *Canvas {
 }
 
 func (c *Canvas) GetWidth() int {
+
 	return c.Width
 }
 
 func (c *Canvas) GetHeight() int {
+
 	return c.Height
 }
 
 func (c *Canvas) Begin() {
-	c.FramebufferMS.Begin()
 
-	g_frameBufferMSStack.Push(c.FramebufferMS)
+	c.framebufferMultiSampled.Begin()
 
-	texture := c.FramebufferSingleSampled.Texture
+	g_frameBufferMultiSampledStack.Push(c.framebufferMultiSampled)
+
+	texture := c.framebufferSingleSampled.Texture
 
 	PushView(texture.Width, texture.Height)
 }
 
 func (c *Canvas) Clear(red, green, blue float32) {
+
 	ClearRect(c.Width, c.Height, red, green, blue)
 }
 
 func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {
+
+	var flippedAlphas []float32
+
 	if alphas == nil {
-		alphas = allOnes
+		flippedAlphas = Const_4Ones
+
+	} else {
+
+		// need to flip alphas
+		flippedAlphas = []float32{alphas[3], alphas[2], alphas[1], alphas[0]}
 	}
 
 	if seeThru {
-		DrawTextureRectUpsideDown(c.FramebufferSingleSampled.Texture, left, top, c.Width, c.Height, alphas)
+		DrawTextureRectUpsideDown(c.framebufferSingleSampled.Texture, left, top, c.Width, c.Height, flippedAlphas)
+
 	} else {
-		DrawCanvasRect(c, left, top, c.Width, c.Height, alphas)
+		DrawCanvasRect(c, left, top, c.Width, c.Height, flippedAlphas)
 	}
 }
 
 func (c *Canvas) End() {
-	c.FramebufferMS.Transfer(c.FramebufferSingleSampled)
+
+	c.framebufferMultiSampled.Transfer(c.framebufferSingleSampled)
 
 	PopView()
 
-	c.FramebufferMS.End()
+	c.framebufferMultiSampled.End()
 
-	g_frameBufferMSStack.Pop()
+	g_frameBufferMultiSampledStack.Pop()
 
-	if g_frameBufferMSStack.Size > 0 {
+	if g_frameBufferMultiSampledStack.Size > 0 {
 
-		frameBufferMS := g_frameBufferMSStack.Top().(*FrameBufferMultiSampled)
+		frameBufferMultiSampled := g_frameBufferMultiSampledStack.Top().(*_FrameBufferMultiSampled)
 
-		frameBufferMS.Begin()
+		frameBufferMultiSampled.Begin()
 	}
 }
 
 func (c *Canvas) Free() {
-	c.FramebufferSingleSampled.Free()
-	c.FramebufferMS.Free()
+
+	c.framebufferSingleSampled.Free()
+	c.framebufferMultiSampled.Free()
 }
 
 

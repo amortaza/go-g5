@@ -4,17 +4,19 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
-type Program struct {
+type _Program struct {
+
 	programId gl.Uint
 
-	vShader, fShader *Shader
+	vShader, fShader *_Shader
 }
 
-func NewProgram(vertexFilename, fragmentFilename string) *Program {
-	p := &Program{}
+func newProgram(vertexFilename, fragmentFilename string) *_Program {
 
-	p.vShader = NewVertexShader(vertexFilename)
-	p.fShader = NewFragmentShader(fragmentFilename)
+	p := &_Program{}
+
+	p.vShader = newVertexShader(vertexFilename)
+	p.fShader = newFragmentShader(fragmentFilename)
 
 	p.programId = gl.CreateProgram()
 
@@ -26,11 +28,13 @@ func NewProgram(vertexFilename, fragmentFilename string) *Program {
 	return p
 }
 
-func (p *Program) Activate() {
+func (p *_Program) Activate() {
+
 	gl.UseProgram(p.programId);
 }
 
-func (p *Program) Free() {
+func (p *_Program) Free() {
+
 	gl.DetachShader(p.programId, p.vShader.shaderId)
 	gl.DetachShader(p.programId, p.fShader.shaderId)
 
@@ -40,8 +44,9 @@ func (p *Program) Free() {
 	gl.DeleteProgram(p.programId)
 }
 
-func (p *Program) GetUniformLocation(name string) gl.Int {
-	return gl.GetUniformLocation(p.programId, GLstr(name))
+func (p *_Program) GetUniformLocation(name string) gl.Int {
+
+	return gl.GetUniformLocation(p.programId, glStr(name))
 }
 
 

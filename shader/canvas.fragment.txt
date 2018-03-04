@@ -20,14 +20,6 @@ void main() {
 
     vec4 tex = texture(Sampler, TexCoord.st);
 
-    //tex = vec4(tex[0],tex[1],tex[2],tex[3]);
-    //FragColor =  tex * vec4(1,1,1,alpha);
-
-    if (tex[3] < alpha) {
-        alpha = tex[3];
-    }
-
-    tex = vec4(tex[0],tex[1],tex[2],alpha);
-    FragColor =  tex;
+    FragColor =  vec4(tex[0], tex[1], tex[2], alpha);
 }
 

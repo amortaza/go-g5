@@ -5,30 +5,33 @@ import (
 	"io/ioutil"
 )
 
-type Shader struct {
+type _Shader struct {
 	shaderId gl.Uint
 }
 
-func NewVertexShader(filename string) *Shader {
+func newVertexShader(filename string) *_Shader {
+
 	return newShader(filename, gl.VERTEX_SHADER)
 }
 
-func NewFragmentShader(filename string) *Shader {
+func newFragmentShader(filename string) *_Shader {
+
 	return newShader(filename, gl.FRAGMENT_SHADER)
 }
 
-func newShader(filename string, shaderType gl.Enum) *Shader {
+func newShader(filename string, shaderType gl.Enum) *_Shader {
+
 	src, err := ioutil.ReadFile(filename)
 
 	if err != nil {
 		panic(err.Error())
 	}
 
-	shader := &Shader{}
+	shader := &_Shader{}
 
 	shader.shaderId = gl.CreateShader(shaderType)
 
-	glSrc, free := GLstrs(string(src) + "\x00")
+	glSrc, free := glStrs(string(src) + "\x00")
 	defer free()
 
 	gl.ShaderSource(shader.shaderId, 1, glSrc, nil)
@@ -45,6 +48,6 @@ func newShader(filename string, shaderType gl.Enum) *Shader {
 	return shader
 }
 
-func (s *Shader) Free() {
+func (s *_Shader) Free() {
 	gl.DeleteShader(s.shaderId);
 }

@@ -8,15 +8,17 @@ import (
 
 var g_projection mgl32.Mat4
 
-var g_colorRect *ColorRect
-var g_textureRect *TextureRect
-var g_canvasRect *TextureRect
+var g_colorRect *_ColorRect
+
+var g_textureRect *_TextureRect
+var g_canvasRect *_TextureRect
 
 var g_viewportWidthStack  adt.Stack
 var g_viewportHeightStack adt.Stack
 var g_orthoStack adt.Stack
 
 func stdGlSetup() {
+
 	gl.Disable(gl.DEPTH_TEST)
 	gl.Disable(gl.CULL_FACE)
 	gl.Disable(gl.STENCIL_TEST)

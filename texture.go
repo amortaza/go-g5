@@ -18,6 +18,7 @@ type Texture struct {
 }
 
 func NewTexture() *Texture {
+
 	t := &Texture{}
 
 	gl.GenTextures(1, &t.TextureId)
@@ -73,7 +74,7 @@ func (t *Texture) LoadImage(filename string) {
 	t.Width  = rgba.Rect.Size().X
 	t.Height = rgba.Rect.Size().Y
 
-	dataPtr := gl.Pointer(GLptr(rgba.Pix))
+	dataPtr := gl.Pointer(glPtr(rgba.Pix))
 
 	t.Activate(gl.TEXTURE0)
 
@@ -92,7 +93,7 @@ func (t *Texture) LoadBytes_RGBA(width, height int, bytes []uint8) {
 	t.Width  = width
 	t.Height = height
 
-	dataPtr := gl.Pointer(GLptr(bytes))
+	dataPtr := gl.Pointer(glPtr(bytes))
 
 	t.Activate(gl.TEXTURE0)
 
