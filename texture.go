@@ -34,7 +34,7 @@ func (t *Texture) Allocate(width, height int) {
 	t.Activate(gl.TEXTURE0)
 
 	gl.TexImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.Sizei(t.Width), gl.Sizei(t.Height), 0, gl.RGBA, gl.UNSIGNED_BYTE, gl.Pointer(nil))
-	//gl.TexImage2DMultisample(gl.TEXTURE_2D_MULTISAMPLE, 4, gl.RGBA8, gl.Sizei(t.Width), gl.Sizei(t.Height), gl.Boolean(0))
+	//gl.TexImage2DMultisample(gl.TEXTURE_2D_MULTISAMPLE, 4, gl.RGBA8, gl.Sizei(t.width), gl.Sizei(t.height), gl.Boolean(0))
 
 	gl.TexParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
 	gl.TexParameterf(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);

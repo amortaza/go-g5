@@ -28,7 +28,7 @@ func onLoop() {
 
 	g5.PushView(xel.WinWidth, xel.WinHeight)
 
-	g5.Clear(0.3, 0.3, 0.32, 1.0)
+	g5.Clear(0.3, 0.3, 0.32)
 
 	g5.DrawTextureRectUpsideDown(troll, 10, 10, 400/2, 365/2, g5.Const_4Ones)
 	g5.DrawTextureRect(troll, 100, 185, 400, 365, g5.Const_4Ones)
