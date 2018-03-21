@@ -1,4 +1,4 @@
-package main
+package one
 
 import (
 	"github.com/amortaza/go-g5"

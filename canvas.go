@@ -1,6 +1,8 @@
 package g5
 
-import "github.com/amortaza/go-adt"
+import (
+	"github.com/amortaza/go-adt"
+)
 
 var g_frameBufferMultiSampledStack adt.Stack
 
@@ -46,7 +48,7 @@ func (c *Canvas) Begin() {
 
 func (c *Canvas) Clear(red, green, blue float32) {
 
-	ClearRect(c.Width, c.Height, red, green, blue)
+	Clear(red, green, blue)
 }
 
 func (c *Canvas) Paint(seeThru bool, left, top int, alphas []float32) {

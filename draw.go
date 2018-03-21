@@ -4,13 +4,14 @@ import (
 	gl "github.com/chsc/gogl/gl33"
 )
 
+/*
 func ClearRect(
 	width, height int,
 	red, green, blue float32 ) {
 
 	g_colorRect.DrawSolid(0, 0, width, height, red, green, blue, (*gl.Float)(&g_projection[0]))
 }
-
+*/
 func DrawColorRect4f(
 		left, top, width, height int,
 		r, g, b, a float32) {
