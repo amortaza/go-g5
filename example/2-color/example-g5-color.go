@@ -19,9 +19,7 @@ func onLoop() {
 
 	g5.PushView(xel.WinWidth, xel.WinHeight)
 
-	g5.Clear(0.93, 0.93, 0.32, 1.0)
-
-	g5.ClearRect(400, 500, 1, 0.6, 0.4 )
+	g5.Clear(0.93, 0.93, 0.32)
 
 	g5.DrawColorRect4f(10, 10, 100, 100, 1, 0, 0, 1)
 	g5.DrawColorRect4f(10, 120, 100, 100, 1, 0, 0, 0.5)
