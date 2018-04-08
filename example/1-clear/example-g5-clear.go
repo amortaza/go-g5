@@ -19,7 +19,7 @@ func onLoop() {
 
 	g5.PushView(xel.WinWidth, xel.WinHeight)
 
-	g5.Clear(0.93, 0.93, 0.32, 1.0)
+	g5.Clear(0.93, 0.93, 0.32)
 
 	g5.PopView()
 }
