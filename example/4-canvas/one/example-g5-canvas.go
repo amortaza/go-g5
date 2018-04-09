@@ -92,7 +92,7 @@ func onLoop() {
 
 func main() {
 
-	xel.Init(700, 800)
+	xel.Init(500, 50, 1300, 1000)
 
 	xel.SetCallbacks(afterGL, onLoop, onBeforeWindowDelete, nil, nil, nil, nil )
 
