@@ -24,19 +24,16 @@ func onLoop() {
 		return
 	}
 
-	//g5.PushView(xel.WinWidth*2, xel.WinHeight/2)
-
 	g5.Clear(0.93, 0.93, 0.32)
-
-	//g5.PopView()
 }
 
 func main() {
 
-	xel.Init(800, 600)
+	// I have an ultra-wide screen :)
+	xel.Init(1200, 100, 800, 600)
 
 	xel.SetCallbacks(afterGL, onLoop, onBeforeWindowDelete, nil, nil, nil, nil )
 
-	xel.Loop("G5 - Color")
+	xel.Loop("Bellina")
 }
 

@@ -22,24 +22,24 @@ func onLoop() {
 	g5.Clear(0.93, 0.93, 0.32)
 
 	g5.DrawColorRect4f(10, 10, 100, 100, 1, 0, 0, 1)
-	g5.DrawColorRect4f(10, 120, 100, 100, 1, 0, 0, 0.5)
+	g5.DrawColorRect4f(20, 120, 100, 100, 1, 0, 0, 0.5)
 
 	leftTop := []float32{1.0, 1.0, 1.0, 1.0}
 	rightTop := []float32{1.0, 1.0, 1.0, 0.0}
 
-	g5.DrawColorRect4v(10, 230, 100, 100, leftTop, rightTop, rightTop, leftTop, )
-	g5.DrawColorRect4v(10, 340, 100, 100, leftTop, leftTop, rightTop, rightTop, )
-
+	g5.DrawColorRect4v(30, 230, 100, 100, leftTop, rightTop, rightTop, leftTop, )
+	g5.DrawColorRect4v(40, 340, 100, 100, leftTop, leftTop, rightTop, rightTop, )
 
 	g5.PopView()
 }
 
 func main() {
 
-	xel.Init(800, 600)
+	// I have an ultra-wide screen :)
+	xel.Init(1200, 100, 800, 600)
 
 	xel.SetCallbacks(afterGL, onLoop, onBeforeWindowDelete, nil, nil, nil, nil )
 
-	xel.Loop("G5 - Color")
+	xel.Loop("Bellina")
 }
 

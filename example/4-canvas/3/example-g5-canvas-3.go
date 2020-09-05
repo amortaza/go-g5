@@ -53,7 +53,8 @@ func onLoop() {
 
 func main() {
 
-	xel.Init(1000, 1000)
+	// I have an ultra-wide screen :)
+	xel.Init(1200, 100, 1000, 1000)
 
 	xel.SetCallbacks(afterGL, onLoop, onBeforeWindowDelete, nil, nil, nil, nil )
 

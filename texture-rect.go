@@ -114,7 +114,7 @@ func setVertexData2(data []float32) {
 	// copy vertices data into VBO (it needs to be bound first)
 	gl.BufferData(gl.ARRAY_BUFFER, gl.Sizeiptr(len(data)*4), gl.Pointer(glPtr(data)), gl.STATIC_DRAW)
 
-	// size of one whole vertex (sum of attrib sizes)
+	// size of 1 whole vertex (sum of attrib sizes)
 	var stride gl.Sizei = 2 /*posPartCount*/ *4 + 2 /*texPartCount*/ *4
 	var offset int = 0
 

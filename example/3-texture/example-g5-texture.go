@@ -14,7 +14,6 @@ func afterGL() {
 	troll = g5.NewTexture()
 	troll.Allocate(400, 365)
 	troll.LoadImage("github.com/amortaza/go-g5/example/troll.png")
-
 }
 
 func onBeforeWindowDelete() {
@@ -41,10 +40,11 @@ func onLoop() {
 
 func main() {
 
-	xel.Init(800, 600)
+	// I have an ultra-wide screen :)
+	xel.Init(1200, 100, 800, 600)
 
 	xel.SetCallbacks(afterGL, onLoop, onBeforeWindowDelete, nil, nil, nil, nil )
 
-	xel.Loop("G5 - Texture")
+	xel.Loop("Bellina")
 }
 
